@@ -18,10 +18,11 @@ pipeline {
             }
             steps {
                 // Checkout the source code from the Git repository defined in Jenkins
-                sshagent(['Github_SSH_Key']) {
-                    checkout([$class: 'scm', branches: [[name: '*/main']],
-                        userRemoteConfigs: [[url: 'git@github.com:cweb-cybr/snake-game.git']]
-                    ])
+                //sshagent(['Github_SSH_Key']) {
+                    //checkout([$class: 'GitSCM', branches: [[name: '*/main']],
+                       // userRemoteConfigs: [[url: 'git@github.com:cweb-cybr/snake-game.git']]
+                   // ])
+                   checkout scm
                 }    
             }
         }  
@@ -49,7 +50,7 @@ pipeline {
                     steps {
                         script {
                             // Perform dynamic code analysis using SonarQube
-                            def scannerHome = tool name: 'SonarQubeScanner'                     
+                            def scannerHome = tool name: 'Sonar'                     
                             withSonarQubeEnv('sonarqube') { // Use the SonarQube environment defined in Jenkins
                                 sh """
                                 ${scannerHome}/bin/sonar-scanner \
