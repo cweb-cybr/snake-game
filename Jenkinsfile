@@ -25,7 +25,7 @@ pipeline {
                    checkout scm
                 }    
             }
-        }  
+          
 
         stage('SECURITY TESTING'){
             parallel{
