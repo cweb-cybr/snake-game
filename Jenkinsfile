@@ -22,6 +22,7 @@ pipeline {
                     checkout([$class: 'scm', branches: [[name: '*/main']],
                         userRemoteConfigs: [[url: 'git@github.com:cweb-cybr/snake-game.git']]
                     ])
+                }    
             }
         }  
 
