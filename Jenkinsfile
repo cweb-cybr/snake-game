@@ -18,7 +18,10 @@ pipeline {
             }
             steps {
                 // Checkout the source code from the Git repository defined in Jenkins
-                checkout scm
+                sshagent(['local-ssh-key']) {
+                    checkout([$class: 'scm', branches: [[name: '*/main']],
+                        userRemoteConfigs: [[url: 'git@github.com:cweb-cybr/snake-game.git']]
+                    ])
             }
         }  
 
