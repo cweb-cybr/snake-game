@@ -67,7 +67,7 @@ pipeline {
             steps {
                 script {
                     // Build a Docker image for the application
-                    def app = docker.build(cybr3120/snake-game) // Build the image with the specified name
+                    def app = docker.build(cybr3120/snakegame) // Build the image with the specified name
                     app.tag("latest") // Tag the image with 'latest'
                 }
             }
