@@ -5,7 +5,7 @@ pipeline {
         ServerName = 'final-project-appserver' // Server label
         DockerhubCredentials = 'DockerhubID' // DockerHub credentials ID
         SnykToken = 'SnykID' // Snyk API token
-        GithubRepo = "cweb-cybr/snake-game" // Name of the Github repository
+        GithubRepo = "https://github.com/cweb-cybr/snake-game.git" // Name of the Github repository
         SONAR_PROJECT_KEY = 'final-snakegame' // The unique identifier for the SonarQube project
     }
 
@@ -71,7 +71,7 @@ pipeline {
             steps {
                 script {
                     // Build a Docker image for the application
-                    def app = docker.build(GithubRepo) // Build the image with the specified name
+                    def app = docker.build(cybr3120/snake-game) // Build the image with the specified name
                     app.tag("latest") // Tag the image with 'latest'
                 }
             }
@@ -84,7 +84,7 @@ pipeline {
                 script {
                     // Authenticate with DockerHub and push the built Docker image
                     docker.withRegistry('https://registry.hub.docker.com', DockerhubCredentials) {
-                        def app = docker.image(GithubRepo) // Reference the Docker image
+                        def app = docker.image(cybr3120/snake-game) // Reference the Docker image
                         app.push("latest") // Push the image with the 'latest' tag
                     }
                 }
