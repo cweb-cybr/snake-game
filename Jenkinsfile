@@ -5,7 +5,7 @@ pipeline {
         ServerName = 'final-project-appserver' // Server label
         DockerhubCredentials = 'DockerhubID' // DockerHub credentials ID
         SnykToken = 'SnykID' // Snyk API token
-        GithubRepo = "https://github.com/cweb-cybr/snake-game.git" // Name of the Github repository
+        // GithubRepo = "https://github.com/cweb-cybr/snake-game.git" Name of the Github repository
         SONAR_PROJECT_KEY = 'final-snakegame' // The unique identifier for the SonarQube project
     }
 
