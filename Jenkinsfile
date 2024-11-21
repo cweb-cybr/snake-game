@@ -23,8 +23,8 @@ pipeline {
             }
           
 
-        stage('SECURITY TESTING'){
-            parallel{
+        // stage('SECURITY TESTING'){
+            // parallel{
                 stage('STATIC SECURITY TESTING WITH SYNK') {
                     // Static testing of the third party code from github.
                     agent { label ServerName }
@@ -57,8 +57,8 @@ pipeline {
                         }
                     }
                 }
-            }      
-        }
+            // }      
+        // }
         
 
         stage('BUILD AND TAG IMAGE') {
