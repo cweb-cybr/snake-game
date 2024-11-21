@@ -80,7 +80,7 @@ pipeline {
                 script {
                     // Authenticate with DockerHub and push the built Docker image
                     docker.withRegistry('https://registry.hub.docker.com', DockerhubCredentials) {
-                        def app = docker.image(cybr3120/snake-game) // Reference the Docker image
+                        def app = docker.image(cybr3120/snakegame) // Reference the Docker image
                         app.push("latest") // Push the image with the 'latest' tag
                     }
                 }
