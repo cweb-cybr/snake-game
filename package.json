@@ -3,7 +3,7 @@
   "version": "1.0.3",
   "description": "A multiplayer snake game built on NodeJs, Express, socket.io, JavaScript ES6, and jspm.",
   "repository": {
-    "type": "git",
+    "type": "git"
    
   },
   "scripts": {
