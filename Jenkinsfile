@@ -32,7 +32,7 @@ pipeline
                     snykSecurity(
                         snykInstallation: 'Snyk', // Reference to the configured Snyk installation in Jenkins.
                         snykTokenId: 'SnykID', // Use the provided Snyk API token.
-                        severity: 'critical' // Set the severity level for not allowing code to continue.
+                        severity: 'high' // Set the severity level for not allowing code to continue.
                     )
                 }
             }
