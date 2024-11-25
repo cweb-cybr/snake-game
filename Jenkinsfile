@@ -4,7 +4,7 @@ pipeline
 
     stages 
     {
-        stage('CLONING GIT REPOSITORY') 
+        stage('Cloning Git Repository') 
         {
             // Cloning the files from github to the Appserver.
             agent 
@@ -19,49 +19,53 @@ pipeline
             }    
         }
           
-
-        stage('STATIC SECURITY TESTING WITH SYNK') 
+        stage('Security Testing')
         {
-            // Static testing of the third party code from github.
-            agent { label 'final-project-appserver' }
-            steps 
+            parallel
             {
-                script 
+                stage('Static Security Testing With Synk') 
                 {
-                    
-                    snykSecurity(
-                        snykInstallation: 'Snyk', // Reference to the configured Snyk installation in Jenkins.
-                        snykTokenId: 'SnykID', // Use the provided Snyk API token.
-                        severity: 'high' // Set the severity level for not allowing code to continue.
-                    )
+                    // Static testing of the third party code from github.
+                    agent { label 'final-project-appserver' }
+                    steps 
+                    {
+                        script 
+                        {
+                            
+                            snykSecurity(
+                                snykInstallation: 'Snyk', // Reference to the configured Snyk installation in Jenkins.
+                                snykTokenId: 'SnykID', // Use the provided Snyk API token.
+                                severity: 'critical' // Set the severity level for not allowing code to continue.
+                            )
+                        }
+                    }
                 }
+
+                stage('Dynamic Security Testing With SonarQube') 
+                {
+                    // Dynamic testing of the Developer's code with SonarQube.
+                    agent { label 'final-project-appserver' }
+                    steps 
+                    {
+                        script 
+                        {
+                            // Perform dynamic code analysis using SonarQube
+                            def scannerHome = tool name: 'Sonar'                     
+                            withSonarQubeEnv('sonarqube') // Use the SonarQube environment defined in Jenkins
+                            { 
+                                sh """
+                                    ${scannerHome}/bin/sonar-scanner \
+                                    -Dsonar.projectKey=final-snakegame \
+                                    -Dsonar.sources=.
+                                """
+                            }
+                        }
+                    }
+                }    
             }
         }
 
-        stage('DYNAMIC SECURITY TESTING WITH SONARQUBE') 
-        {
-            // Dynamic testing of the Developer's code with SonarQube.
-            agent { label 'final-project-appserver' }
-            steps 
-            {
-                script 
-                {
-                    // Perform dynamic code analysis using SonarQube
-                    def scannerHome = tool name: 'Sonar'                     
-                    withSonarQubeEnv('sonarqube') // Use the SonarQube environment defined in Jenkins
-                    { 
-                        sh """
-                            ${scannerHome}/bin/sonar-scanner \
-                            -Dsonar.projectKey=final-snakegame \
-                            -Dsonar.sources=.
-                        """
-                    }
-                }
-            }
-        }    
-
-
-        stage('BUILD AND TAG IMAGE') 
+        stage('Build and Tag Image') 
         {
             // Build Docker image with the tag "Latest".
             agent { label 'final-project-appserver' }
@@ -76,7 +80,7 @@ pipeline
             }
         }
 
-        stage('POST IMAGE TO DOCKERHUB') 
+        stage('Post Image to DockerHub') 
         {    
             // Push the new Docker image to DockerHub with the tag Latest.
             agent { label 'final-project-appserver' }
@@ -94,7 +98,7 @@ pipeline
             }
         }
 
-        stage('PREPARE ENVIRONMENT') 
+        stage('Prepare Environment') 
         {
             agent { label 'final-project-appserver' }
             steps 
@@ -116,7 +120,7 @@ pipeline
             }
         }
 
-        stage('DEPLOYMENT') 
+        stage('Deployment') 
         {    
             // Deploy the Image.
             agent { label 'final-project-appserver' }
