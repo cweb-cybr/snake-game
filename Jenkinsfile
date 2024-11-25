@@ -52,7 +52,7 @@ pipeline
                     { 
                         sh """
                             ${scannerHome}/bin/sonar-scanner \
-                            -Dsonar.projectKey= final-snakegame \
+                            -Dsonar.projectKey=final-snakegame \
                             -Dsonar.sources=.
                         """
                     }
