@@ -20,7 +20,6 @@ pipeline
         }
           
 
-
         stage('STATIC SECURITY TESTING WITH SYNK') 
         {
             // Static testing of the third party code from github.
@@ -29,9 +28,8 @@ pipeline
             {
                 script 
                 {
-                    // Perform static analysis of the project code using Snyk
-                    snykSecurity
-                    (
+                    
+                    snykSecurity(
                         snykInstallation: 'Snyk', // Reference to the configured Snyk installation in Jenkins.
                         snykTokenId: 'SnykID', // Use the provided Snyk API token.
                         severity: 'critical' // Set the severity level for not allowing code to continue.
@@ -52,8 +50,7 @@ pipeline
                     def scannerHome = tool name: 'Sonar'                     
                     withSonarQubeEnv('sonarqube') // Use the SonarQube environment defined in Jenkins
                     { 
-                        sh 
-                        """
+                        sh """
                             ${scannerHome}/bin/sonar-scanner \
                             -Dsonar.projectKey= 'final-snakegame' \
                             -Dsonar.sources=.
@@ -105,8 +102,7 @@ pipeline
                 script 
                 {   // Find and stop any Docker container using port 80 so there isn't any conflicts when deploying.
                     
-                    sh 
-                    '''
+                    sh '''
                         CONTAINER_ID=$(docker ps -q --filter "publish=80")
                         if [ -n "$CONTAINER_ID" ]; then
                             echo "Stopping container using port 80: $CONTAINER_ID"
