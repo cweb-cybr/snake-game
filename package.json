@@ -24,7 +24,7 @@
     "istanbul": "^0.4.3",
     "mocha": "^10.8.2",
     "socket.io-client": "^4.8.1",
-    "supertest": "^1.2.0"
+    "supertest": "^7.0.0"
   },
   "dependencies": {
     "express": "^4.14.0",
