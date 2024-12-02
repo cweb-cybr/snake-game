@@ -33,8 +33,5 @@
     "socket.io": "^1.4.6",
     "validator": "^5.4.0"
   },
-  "overrides": {
-  "zlib": "1.2.12-r0"
-},
   "license": "MIT"
 }
