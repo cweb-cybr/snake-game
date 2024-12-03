@@ -1,7 +1,7 @@
 version: '3.3'
 services:
   snake:
-    image: 'test'
+    image: 'cybr3120/snakegame:latest'
     environment:
       - "PORT:3000"
     ports:
