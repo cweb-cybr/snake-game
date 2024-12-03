@@ -1,7 +1,9 @@
-FROM mhart/alpine-node
+FROM alpine:latest
 
 # Update apk-tools and ensure all packages are updated
 RUN apk update && apk upgrade --no-cache
+
+RUN apk add --update nodejs npm
 
 # Set the working directory
 WORKDIR /app
@@ -10,7 +12,7 @@ WORKDIR /app
 COPY package*.json ./
 
 # Install or update dependencies
-RUN npm install
+RUN npm install --legacy-peer-deps
 
 # Copy the rest of the application files
 COPY . .
