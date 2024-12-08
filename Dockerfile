@@ -1,9 +1,9 @@
 FROM alpine:latest
 
 # Update apk-tools and ensure all packages are updated
-RUN apk update && apk upgrade --no-cache
+RUN apk add --update nodejs npm update && apk upgrade --no-cache
 
-RUN apk add --update nodejs npm
+# RUN apk add --update nodejs npm
 
 # Set the working directory
 WORKDIR /app
