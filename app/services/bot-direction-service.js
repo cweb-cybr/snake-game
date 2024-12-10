@@ -39,7 +39,6 @@ class BotDirectionService {
         }
         if (!this.isBotInDanger(bot.getHeadCoordinate(), otherNewDirection, 1)) {
             bot.changeDirection(otherNewDirection);
-            return;
         }
     }
 
