@@ -45,6 +45,6 @@ Got ideas? Let us know!
 
 Got questions, suggestions, or just want to say hi? We’d love to hear from you!
 
-    Email: kralouf@dunwoody.edu or maramem@dunwoody.edu
+    
 
 🎉 Thanks for checking out the Snake Game! Have fun, and don’t forget to share your high score!
