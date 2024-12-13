@@ -31,7 +31,7 @@
     "less-middleware": "^3.0.0",
     "serve-favicon": "^2.3.0",
     "socket.io": "^4.8.1",
-    "validator": "^13.7.0"
+    "validator": "^13.12.0"
   },
   "overrides": {
   "zlib": "1.2.12-r0"
